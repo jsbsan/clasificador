@@ -1,0 +1,48 @@
+' Gambas module file
+
+Private hconn As Connection
+Private hresult As Result
+Private editando As Boolean ' nos sirve para saber si estamos editanto o agregando datos nuevo
+
+Public Sub ConnectarBase() As Connection
+  
+  hconn = New Connection
+  hconn.host = settings["ruta", User.home &/ ".config/dbtag"]
+  hconn.name = "dbTAG.sqlite3"
+  hconn.type = "sqlite3"
+  Try hconn.Open()
+  
+  Return hconn
+  
+  ' If Error Then 
+  '   Print Error.Backtrace
+  '   Print Error.Text
+  '   
+  '   hconn = Null
+  '   Message.Error("Error al conectar con la base")
+  '   
+  ' Endif
+  ' 
+End
+
+Public Sub cerrarconexion()
+  
+  If hconn = Null Then Return 
+  hconn.Close()
+  hconn = Null
+  
+End
+
+Public Sub ReiniciarBaseDatos()
+  
+  If Not Exist(User.home &/ ".config/dbtag/") Then  
+    Try Mkdir User.home &/ ".config/dbtag/"
+  Endif
+  
+  Try Copy "dbTAG" To User.home &/ ".config/dbtag/dbTAG.sqlite3"
+  If Error Then 
+    Message.Info("El archivo existe")
+    
+  Endif
+  
+End

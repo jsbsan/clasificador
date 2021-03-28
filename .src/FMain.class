@@ -1,0 +1,142 @@
+' Gambas class file
+
+Public modo As String
+
+Public listaLabel As New Label[]
+Public hconexion As Connection
+Public hresult As Result
+
+Public Sub ButtonActualizarTAG_Click()
+  
+  Dim tmplabel As Label
+  'cargar etiquetas existentes
+  hconexion = BaseDatos.ConnectarBase()
+  hresult = hconexion.Exec("Select * from TAG")
+  listaLabel = New Label[]
+  ScrollView1.Children.Clear()
+  
+  Do While hresult.available
+    tmplabel = New Label(ScrollView1) As "EtiquetasTAG"
+    tmplabel.text = hresult["tag"]
+    tmplabel.Border = Border.Plain
+    tmplabel.Background = hresult["color"]
+    tmplabel.tag = hresult["idtag"]
+    tmplabel.Alignment = Align.center
+    tmplabel.w = tmplabel.Font.TextWidth("  " & tmplabel.text & "  ")
+    tmplabel.PopupMenu = "menu1"
+    'tmplabel.Expand = False
+    tmplabel.h = 20
+    tmplabel.Drop = True
+    listaLabel.add(tmplabel)
+    hresult.MoveNext
+  Loop
+  
+  'concetar base de datos
+  'consutar etiquetas
+  'crear botones con los colores y texto de las etiquetas
+  
+End
+
+Public Sub EtiquetasTAG_DblClick()
+  
+  Dim tmplabel As Label
+  
+  Select Case modo
+    Case "editar color"
+      
+      If Not Dialog.SelectColor() Then 
+        
+        Print Dialog.color
+        hconexion = BaseDatos.ConnectarBase()
+        hresult = hconexion.edit("TAG", "idtag=&1", Last.tag)
+        hresult["tag"] = Last.text
+        hresult["color"] = Dialog.color
+        hresult["idtag"] = Last.tag
+        hresult.Update()
+        ButtonActualizarTAG_Click()
+      Endif
+    Case "añadir a filtro tag"
+      
+      tmplabel = New Label(PanelPalabrasFiltro) As "EtiquetasFILTROTAG"
+      tmplabel.text = Last.text
+      tmplabel.Border = Border.Plain
+      tmplabel.Background = Last.Background
+      tmplabel.tag = Last.TAG
+      tmplabel.Alignment = Align.center
+      tmplabel.w = tmplabel.Font.TextWidth("  " & Last.text & "  ")
+      
+    Case Else
+      Message.Info("Elige un modo")
+  End Select
+  
+End
+
+Public Sub Form_Open()
+  
+  ButtonActualizarTAG_Click()
+  
+End
+
+Public Sub ButtonReiniciarBD_Click()
+  
+  BaseDatos.ReiniciarBaseDatos()
+  
+End
+
+Public Sub ButtonNuevoTAg_Click()
+  
+  Dim res As String
+  
+  res = InputBox("Tag:")
+  
+  If res <> "" Then 
+    'añadir nuevo tag
+    hconexion = BaseDatos.ConnectarBase()
+    hconexion.Exec("insert into TAG values (&1,&2,&3)", Null, res, Color.White)
+    ButtonActualizarTAG_Click()
+    
+  Endif
+  
+End
+
+Public Sub ScrollViewFicheros_Drop()
+  
+  Dim tmplabel As Label
+  
+  Print Drag.Data
+  
+  tmplabel = New Label(ScrollViewFicheros)
+  
+  tmplabel.Border = Border.Plain
+  tmplabel.Background = Color.white
+  tmplabel.text = File.baseName(drag.data) & "." & File.Ext(Drag.data)
+  tmplabel.w = tmplabel.Font.TextWidth("  " & tmplabel.text & "  ")
+  tmplabel.Tooltip = tmplabel.text
+  tmplabel.Border = Border.Plain
+  tmplabel.h = 20
+  
+End
+
+Public Sub ScrollViewFicheros_Draw()
+  
+End
+
+Public Sub ButtonColorTag_Click()
+  
+  modo = "editar color"
+  LabelAyuda.text = "Modo: " & modo
+  
+End
+
+Public Sub ButtonFiltroTag_Click()
+  
+  modo = "añadir a filtro tag"
+  LabelAyuda.text = "Modo: " & modo
+  
+End
+
+Public Sub ButtonLimpiarFiltro_Click()
+  
+  PanelPalabrasFiltro.Children.Clear()
+  
+End

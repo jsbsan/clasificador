@@ -1,0 +1,83 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,122,71)
+  { Menu1 Menu
+    Text = ("Menu1")
+    { MenuFiltrar Menu
+      Text = ("Añadir a Filtro")
+      Picture = Picture["icon:/16/right"]
+    }
+  }
+  { ButtonActualizarTAG Button
+    MoveScaled(1,0,5,4)
+    ToolTip = ("ActualizarTAG")
+    Picture = Picture["icon:/16/refresh"]
+  }
+  { ButtonReiniciarBD Button
+    MoveScaled(83,1,12,3)
+    Text = ("Reiniciar BD")
+  }
+  { ScrollView1 ScrollView
+    MoveScaled(1,5,40,57)
+    ToolTip = ("Haz doble click para cambiar color o añadir a filtro")
+    Arrangement = Arrange.Row
+  }
+  { Label1 Label
+    MoveScaled(49,0,11,4)
+  }
+  { ButtonNuevoTAg Button
+    MoveScaled(6,0,7,4)
+    ToolTip = ("Nuevo TAG")
+    Picture = Picture["icon:/16/new"]
+  }
+  { ScrollViewFicheros ScrollView
+    MoveScaled(44,19,73,43)
+    Drop = True
+    Arrangement = Arrange.Vertical
+  }
+  { PanelFiltro Panel
+    MoveScaled(44,5,72,10)
+    Border = Border.Plain
+    { Label2 Label
+      MoveScaled(1,0,10,3)
+      Text = ("Filtrar")
+    }
+    { Label3 Label
+      MoveScaled(1,3,9,3)
+      Drop = True
+      Text = ("Contiene:")
+    }
+    { PanelPalabrasFiltro Panel
+      MoveScaled(11,2,52,4)
+      Drop = True
+      Arrangement = Arrange.Horizontal
+      Border = Border.Plain
+    }
+    { ButtonLimpiarFiltro Button
+      MoveScaled(68,2,3,4)
+      Picture = Picture["icon:/16/clear"]
+    }
+    { ButtonEjecutaFiltro Button
+      MoveScaled(63,2,4,4)
+      Picture = Picture["icon:/16/exec"]
+    }
+  }
+  { ButtonColorTag Button
+    MoveScaled(31,0,5,4)
+    ToolTip = ("Modo Cambiar Color Tag")
+    Picture = Picture["icon:/16/color"]
+  }
+  { LabelAyuda Label
+    MoveScaled(1,63,116,3)
+  }
+  { ButtonFiltroTag Button
+    MoveScaled(37,0,4,4)
+    ToolTip = ("Modo Añadir Filtro Tag")
+    Picture = Picture["icon:/16/filter"]
+  }
+  { Label4 Label
+    MoveScaled(14,0,6,4)
+    Text = ("Modo:")
+  }
+}
