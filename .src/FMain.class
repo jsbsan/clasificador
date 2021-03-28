@@ -37,13 +37,13 @@ Public Sub ButtonActualizarTAG_Click()
   
 End
 
-Public Sub EtiquetasTAG_DblClick()
+Public Sub EtiquetasTAG_MouseDown()
   
   Dim tmplabel As Label
   
   Select Case modo
     Case "editar color"
-      
+      Dialog.color = Last.Background
       If Not Dialog.SelectColor() Then 
         
         Print Dialog.color
@@ -65,6 +65,12 @@ Public Sub EtiquetasTAG_DblClick()
       tmplabel.Alignment = Align.center
       tmplabel.w = tmplabel.Font.TextWidth("  " & Last.text & "  ")
       
+    Case "borrar tag"
+      
+      hconexion = BaseDatos.ConnectarBase()
+      hconexion.Delete("TAG", "idtag=&1", Last.tag)
+      
+      ButtonActualizarTAG_Click()
     Case Else
       Message.Info("Elige un modo")
   End Select
@@ -102,22 +108,19 @@ End
 Public Sub ScrollViewFicheros_Drop()
   
   Dim tmplabel As Label
+  Dim fichero As String
   
   Print Drag.Data
-  
+  fichero = comun.CambioLetras(Replace(Split(Drag.data, "\r")[0], "file://", ""))
   tmplabel = New Label(ScrollViewFicheros)
   
   tmplabel.Border = Border.Plain
   tmplabel.Background = Color.white
-  tmplabel.text = File.baseName(drag.data) & "." & File.Ext(Drag.data)
-  tmplabel.w = tmplabel.Font.TextWidth("  " & tmplabel.text & "  ")
+  tmplabel.text = File.baseName(fichero) & "." & File.Ext(fichero)
+  tmplabel.w = tmplabel.Font.TextWidth("  " & fichero & "  ")
   tmplabel.Tooltip = tmplabel.text
   tmplabel.Border = Border.Plain
   tmplabel.h = 20
-  
-End
-
-Public Sub ScrollViewFicheros_Draw()
   
 End
 
@@ -138,5 +141,16 @@ End
 Public Sub ButtonLimpiarFiltro_Click()
   
   PanelPalabrasFiltro.Children.Clear()
+  
+End
+
+Public Sub ButtonBorrarTag_Click()
+  
+  modo = "borrar tag"
+  LabelAyuda.text = "Modo: " & modo
+  
+End
+
+Public Sub ScrollViewFicheros_Draw()
   
 End

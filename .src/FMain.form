@@ -1,7 +1,8 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,122,71)
+  MoveScaled(0,0,153,71)
+  Icon = Picture["Gambas fondo Pantalla.png"]
   { Menu1 Menu
     Text = ("Menu1")
     { MenuFiltrar Menu
@@ -19,7 +20,7 @@
     Text = ("Reiniciar BD")
   }
   { ScrollView1 ScrollView
-    MoveScaled(1,5,40,57)
+    MoveScaled(1,5,40,58)
     ToolTip = ("Haz doble click para cambiar color o añadir a filtro")
     Arrangement = Arrange.Row
   }
@@ -32,12 +33,13 @@
     Picture = Picture["icon:/16/new"]
   }
   { ScrollViewFicheros ScrollView
-    MoveScaled(44,19,73,43)
+    MoveScaled(43,16,109,47)
     Drop = True
     Arrangement = Arrange.Vertical
+    AutoResize = True
   }
   { PanelFiltro Panel
-    MoveScaled(44,5,72,10)
+    MoveScaled(43,5,72,10)
     Border = Border.Plain
     { Label2 Label
       MoveScaled(1,0,10,3)
@@ -79,5 +81,10 @@
   { Label4 Label
     MoveScaled(14,0,6,4)
     Text = ("Modo:")
+  }
+  { ButtonBorrarTag Button
+    MoveScaled(21,0,5,4)
+    ToolTip = ("Modo Borrar Tag")
+    Picture = Picture["icon:/16/delete"]
   }
 }
