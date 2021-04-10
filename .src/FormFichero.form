@@ -1,0 +1,26 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,131,14)
+  { Labelfecha Label
+    MoveScaled(0,0,18,14)
+    Font = Font["+3"]
+    ToolTip = ("haga click para cambiar fecha")
+    Text = ("2021/03/32")
+    Alignment = Align.Center
+    Border = Border.Plain
+  }
+  { Labelfichero Label
+    MoveScaled(18,0,49,5)
+    Border = Border.Plain
+  }
+  { LabelNotas Label
+    MoveScaled(18,5,113,9)
+    Background = &HB5E037&
+    Border = Border.Plain
+  }
+  { Labeltag Label
+    MoveScaled(67,0,64,5)
+    Border = Border.Plain
+  }
+}

@@ -122,6 +122,13 @@ Public Sub ScrollViewFicheros_Drop()
   tmplabel.Border = Border.Plain
   tmplabel.h = 20
   
+  '
+  Dim f As FormFichero
+  
+  f = New FormFichero(ScrollViewFicheros)
+  f.FECHA = Format(Now, "yyyy/mm/dd")
+  f.FICHERO = fichero
+  
 End
 
 Public Sub ButtonColorTag_Click()
@@ -148,9 +155,5 @@ Public Sub ButtonBorrarTag_Click()
   
   modo = "borrar tag"
   LabelAyuda.text = "Modo: " & modo
-  
-End
-
-Public Sub ScrollViewFicheros_Draw()
   
 End

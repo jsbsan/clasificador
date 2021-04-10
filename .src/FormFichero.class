@@ -1,0 +1,31 @@
+' Gambas class file
+
+' Gambas class file
+
+Public FECHA As String
+Public FICHERO As String
+Public NOTAS As String
+
+Public ClaseTag As Ctag
+
+Public Sub Labelfecha_MouseDown()
+  
+  Dim texto As String
+  
+  texto = InputBox("Fecha:", "Asignar Fecha AÑO/MES/DIA YYYY/MM/DD", Labelfecha.text)
+  
+  If TEXTO = "" Then 
+    Return 
+  Else
+    Labelfecha.TEXT = TEXTO
+    
+  Endif
+  
+End
+
+Public Sub Form_Open()
+  
+  Labelfecha.text = FECHA
+  Labelfichero.text = fichero
+  
+End

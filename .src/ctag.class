@@ -1,0 +1,4 @@
+' Gambas class file
+
+Public palabra As String
+Public ncolor As Integer
